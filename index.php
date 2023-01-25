@@ -12,6 +12,12 @@
 
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script>
+    <style>
+    .selector:hover {
+        opacity: 0.5;
+        cursor: pointer;
+    }
+    </style>
 </head>
 
 <body>
