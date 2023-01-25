@@ -71,6 +71,10 @@
     <script>
     const accessToken = 'pk.eyJ1Ijoid2FpaHVyYSIsImEiOiJja2ViYXhrb3QwNzNpMnNwN3E1cjJqc2FiIn0.hRhDToVXvpHz57fPueVtdg'
 
+    /**
+     * We're using the Mapbox API to search for a location, and then we're using the results to populate a
+     * dropdown menu
+     */
     function searchLocation() {
         let searchText = $('#street-address').val(),
             url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/'
@@ -111,10 +115,14 @@
             .catch(handleError)
     }
 
+    /**
+     * If the response is not ok, then log an error message to the console.
+     */
     function handleError(err) {
         console.log("Error fetching data, ", err)
     }
 
+    /* This function is creating a map and adding a draw control to it. */
     function handleOnclick(value) {
         let LngLat = value.split(",")
         const lng = LngLat[0]
