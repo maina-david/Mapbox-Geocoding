@@ -21,10 +21,15 @@
         type="text/css">
     <div class="card">
         <div class="card-body">
-            <div class="mt-3">
-                <input type="text" class="form-control" id="street-address"
-                    placeholder="Enter a street address in the United States to start" onkeyup="searchLocation()">
-                <div id="select-suggestions"></div>
+            <div class="d-flex justify-content-center">
+                <div class="mt-3 form-group form-outline w-50 text-center">
+                    <input type="text" class="form-control" id="street-address"
+                        placeholder="Enter a street address in the United States to start" onkeyup="searchLocation()"
+                        autofocus>
+                    <small class="fw-lighter fst-italic mb-2">example: Wilbraham, Massachusetts 01095, United
+                        States</small>
+                    <div class="mt-2" id="select-suggestions"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -61,7 +66,7 @@
             url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/'
 
         const endpoint = url + searchText + '.json?access_token=' + accessToken +
-            '&country=US&autocomplete=true&types=address'
+            '&country=US&autocomplete=true&types=postcode,address'
 
         const wesPromise = fetch(endpoint)
 
@@ -115,7 +120,7 @@
             container: 'map', // container ID
             style: 'mapbox://styles/mapbox/satellite-v9', // style URL
             center: [lng, lat], // starting position [lng, lat]
-            zoom: 18, // starting zoom
+            zoom: 17, // starting zoom
         });
 
         const draw = new MapboxDraw({
