@@ -62,7 +62,7 @@
 
     <script>
     const accessToken = 'pk.eyJ1Ijoid2FpaHVyYSIsImEiOiJja2ViYXhrb3QwNzNpMnNwN3E1cjJqc2FiIn0.hRhDToVXvpHz57fPueVtdg'
-    var drawFeatureID = '';
+
     /**
      * We're using the Mapbox API to search for a location, and then we're using the results to populate a
      * dropdown menu
