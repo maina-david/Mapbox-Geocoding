@@ -32,7 +32,7 @@
                     <input type="text" class="form-control" id="street-address"
                         placeholder="Enter a street address in the United States to start" onkeyup="searchLocation()"
                         autofocus>
-                    <small class="fw-lighter fst-italic mb-2">example: Wilbraham, Massachusetts 01095, United
+                    <small class="fw-lighter fst-italic mb-2">example: Kilian Drive, Danbury, Connecticut 06811, United
                         States</small>
                     <div class="mt-2" id="select-suggestions"></div>
                 </div>
@@ -62,7 +62,7 @@
 
     <script>
     const accessToken = 'pk.eyJ1Ijoid2FpaHVyYSIsImEiOiJja2ViYXhrb3QwNzNpMnNwN3E1cjJqc2FiIn0.hRhDToVXvpHz57fPueVtdg'
-
+    var drawFeatureID = '';
     /**
      * We're using the Mapbox API to search for a location, and then we're using the results to populate a
      * dropdown menu
@@ -72,15 +72,13 @@
             url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/'
 
         const endpoint = url + searchText + '.json?access_token=' + accessToken +
-            '&country=US&autocomplete=true&types=postcode,address'
+            '&country=US&autocomplete=true&types=address'
 
         const wesPromise = fetch(endpoint)
 
         wesPromise
             .then((response) => response.json())
             .then((data) => {
-                console.log(data.features)
-
                 let suggestions = data.features,
                     html = '',
                     options = document.getElementById("select-suggestions")
@@ -131,7 +129,6 @@
 
         const draw = new MapboxDraw({
             displayControlsDefault: false,
-            // Select which mapbox-gl-draw control buttons to add to the map.
             controls: {
                 polygon: true,
                 trash: true
