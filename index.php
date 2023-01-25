@@ -15,22 +15,6 @@
 </head>
 
 <body>
-    <style>
-    .calculation-box {
-        height: 75px;
-        width: 150px;
-        background-color: rgba(255, 255, 255, 0.9);
-        padding: 15px;
-        text-align: center;
-        display: none;
-    }
-
-    p {
-        font-family: 'Open Sans';
-        margin: 0;
-    }
-    </style>
-
     <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.2.2/mapbox-gl-draw.js"></script>
     <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.2.2/mapbox-gl-draw.css"
@@ -44,23 +28,20 @@
             </div>
         </div>
     </div>
-    <div class="card">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-6">
-                    <div id='map' style='height: 300px;'>
-                    </div>
-                </div>
 
-                <div class="col-6 calculation-box">
-                    <p>Click the map to draw a polygon.</p>
-                    <div id="calculated-area"></div>
-                </div>
+    <div class="row match-height">
+        <div class="card col-6 map-box" style="display: none;">
+            <div class="card-body">
+                <div id='map' style='height: 300px;'></div>
             </div>
         </div>
+        <div class="card col-6 calculation-box" style="display: none;">
+            <div class="card-header">
+                Click the map to draw a polygon
+            </div>
+            <div class="card-body" id="calculated-area"></div>
+        </div>
     </div>
-    </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
@@ -124,6 +105,8 @@
 
     /* This function is creating a map and adding a draw control to it. */
     function handleOnclick(value) {
+        document.getElementsByClassName('map-box')[0].style.display = 'block'
+        document.getElementsByClassName('calculation-box')[0].style.display = 'block'
         let LngLat = value.split(",")
         const lng = LngLat[0]
         const lat = LngLat[1]
@@ -147,10 +130,6 @@
             defaultMode: 'draw_polygon'
         });
 
-        const calculationBox = document.getElementsByClassName('calculation-box')
-
-        calculationBox[0].style.display = 'block'
-
         map.addControl(draw)
         map.addControl(new mapboxgl.NavigationControl())
 
@@ -167,7 +146,8 @@
                 const rounded_area = Math.round(area * 100) / 100
 
                 const areaInCM = rounded_area * 10000
-                answer.innerHTML = `<p><strong>${rounded_area}</strong></p><p>square meters</p>`;
+                answer.innerHTML =
+                    `<p><strong>${areaInCM.toLocaleString('en-US')}</strong> square centimeters</p>`;
             } else {
                 answer.innerHTML = ''
                 if (e.type !== 'draw.delete')
