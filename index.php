@@ -48,7 +48,7 @@
         </div>
         <div class="card col-6 calculation-box" style="display: none;">
             <div class="card-header">
-                Click the map to draw a polygon
+                Click the map to draw a roof to get roof size in cm
             </div>
             <div class="card-body" id="calculated-area"></div>
         </div>
