@@ -133,13 +133,40 @@
                 polygon: true,
                 trash: true
             },
+            styles: [{
+                    id: "gl-draw-polygon-fill-color",
+                    type: "fill",
+                    filter: ["all", ["==", "$type", "Polygon"],
+                        ["!=", "mode", "static"]
+                    ],
+                    paint: {
+                        "fill-color": "#FFFFE0",
+                        "fill-outline-color": "#FFFFE0",
+                        "fill-opacity": 0.5
+                    }
+                },
+                {
+                    id: "gl-draw-polygon-stroke-color",
+                    type: "line",
+                    filter: ["all", ["==", "$type", "Polygon"],
+                        ["!=", "mode", "static"]
+                    ],
+                    layout: {
+                        "line-cap": "round",
+                        "line-join": "round"
+                    },
+                    paint: {
+                        "line-color": "#FFFFE0",
+                        "line-width": 2
+                    }
+                },
+            ],
             // Set mapbox-gl-draw to draw by default.
             // The user does not have to click the polygon control button first.
             defaultMode: 'draw_polygon'
         });
 
         map.addControl(draw)
-        map.addControl(new mapboxgl.NavigationControl())
 
         map.on('draw.create', updateArea)
         map.on('draw.delete', updateArea)
@@ -162,6 +189,7 @@
                     alert('Click the map to draw a polygon.')
             }
         }
+
     }
     </script>
 </body>
