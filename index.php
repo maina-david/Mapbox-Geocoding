@@ -127,6 +127,9 @@
             zoom: 17, // starting zoom
         });
 
+        var nav = new mapboxgl.NavigationControl();
+        map.addControl(nav, 'top-left');
+
         const draw = new MapboxDraw({
             displayControlsDefault: false,
             controls: {
